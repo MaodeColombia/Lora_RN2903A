@@ -25,7 +25,7 @@ Install “Sodaq_RN2483” and “Sodaq_wdt”
 
 void setup() {
   // put your setup code here, to run once:
-  Enable LoRa module
+  //Enable LoRa module
   #if defined(ARDUINO_SODAQ_AUTONOMO)
   pinMode(BEE_VCC, OUTPUT);
   digitalWrite(BEE_VCC, HIGH); //set input power BEE high
@@ -47,7 +47,6 @@ void setup() {
   delay(100);
   digitalWrite(LORA_RESET, HIGH);
   delay(1000);
-
   // empty the buffer
   LORA_STREAM.end();
   #endif
@@ -60,7 +59,7 @@ void setup() {
   delay(100);
 
   char buff[16];
-  memset(buff, 0, sizeof(buff));
+  memset(buff, 0, sizeof(buff)); // https://es.stackoverflow.com/questions/78218/para-que-sirve-el-memset
 
   LORA_STREAM.readBytesUntil(0x20, buff, sizeof(buff));
   CONSOLE_STREAM.print(buff);

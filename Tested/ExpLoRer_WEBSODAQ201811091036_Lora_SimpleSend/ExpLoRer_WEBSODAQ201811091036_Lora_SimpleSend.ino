@@ -6,6 +6,10 @@
 #define loraSerial Serial2
 
 // USE YOUR OWN KEYS!
+//MMO: const    declaracion deuna cosntante
+//MMO: u        Sin signo
+//MMO: int8     de 8bits
+//MMO: _t       simplemente para decir que es de "type", type unsigned 8bits
 const uint8_t devAddr[4] =
 {
   0x00, 0x00, 0x00, 0x00

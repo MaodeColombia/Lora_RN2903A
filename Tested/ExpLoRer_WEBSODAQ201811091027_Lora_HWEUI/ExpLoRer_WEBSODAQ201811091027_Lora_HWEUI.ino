@@ -3,7 +3,7 @@
 /*
 Install the required libraries from the Arduino library manager.
 Sketch -> Include library -> Manage libraries…
-Install “Sodaq_RN2483” and “Sodaq_wdt”
+Install (“Sodaq_RN2483” and “Sodaq_wdt”) it was installed on arduino IDE
 */
 
 /**
@@ -53,7 +53,6 @@ void setup() {
   delay(1000);
   // empty the buffer
   LORA_STREAM.end();
-  CONSOLE_STREAM.println("Hardreset the RN module");
   #endif
 
   LORA_STREAM.begin(57600);
