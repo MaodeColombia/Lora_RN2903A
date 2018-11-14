@@ -52,9 +52,11 @@ void setup()
 {
 	while ((!debugSerial) && (millis() < 10000));//MMO: obligo a que me epere a  abrir el monitor, almennos por 10 segundos
 
-	int MMObaudrateLora=LoRaBee.getDefaultBaudRate();
+	int MMObaudrateLora = LoRaBee.getDefaultBaudRate();
 	loraSerial.begin(MMObaudrateLora);
 	debugSerial.println(MMObaudrateLora);
+
+	LoRaBee.setDiag(debugSerial); // MMO: Supuetamente
 
 	if (!LoRaBee.initABP(loraSerial, devAddr, appSKey, nwkSKey, true))
 	{
