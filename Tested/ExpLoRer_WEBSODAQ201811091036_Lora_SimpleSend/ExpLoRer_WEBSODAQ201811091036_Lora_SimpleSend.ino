@@ -39,10 +39,11 @@ void setup()
 
   debugSerial.begin(57600);
   loraSerial.begin(LoRaBee.getDefaultBaudRate());
+  debugSerial.println(LoRaBee.getDefaultBaudRate());
 
   LoRaBee.setDiag(debugSerial); // optional
 
-  if (LoRaBee.initABP(loraSerial, devAddr, appSKey, nwkSKey, false))
+  if (LoRaBee.initABP(loraSerial, devAddr, appSKey, nwkSKey, false)) //MMO: Activation by Personalization
   {
     debugSerial.println("Connection to the network was successful.");
   }
@@ -87,7 +88,7 @@ void loop()
       debugSerial.println("The size of the payload is greater than allowed. Transmission failed!");
       break;
     case InternalError:
-      debugSerial.println("Oh No! This shouldn't happen. Something is really wrong! Try restarting the device!\r\nThe program will now halt.");
+      debugSerial.println("Oh No! This shouldn't happen. Something is really wrong! Try restarting the device!\r\nThe program will now .");
       while (1) {};
       break;
     case Busy:
