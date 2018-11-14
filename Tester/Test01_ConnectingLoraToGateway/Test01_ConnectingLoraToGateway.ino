@@ -1,3 +1,7 @@
+#include <Sodaq_RN2483.h>
+#include <Sodaq_RN2483_internal.h>
+#include <Utils.h>
+
 /*
 Fracmento copiado de "C:\Users\Ruth\Documents\Arduino\libraries\Sodaq_RN2483\Readme.md"
 Caracteristicas:
@@ -10,7 +14,11 @@ este código intenta establecer el enlace con la infomación que le doy, habria 
 Probablemente falte la inicializacion del LoRa
 
 Secuencia del código:
--
+- parámetro iniciales para el initOTA()
+		devAddr[4]
+		appSKey[16]
+		nwkSKey[16]
+		testPayload[]
 
 */
 
@@ -50,7 +58,9 @@ const uint8_t testPayload[] =
 
 void setup()
 {
-	while ((!debugSerial) && (millis() < 10000));//MMO: obligo a que me epere a  abrir el monitor, almennos por 10 segundos
+	//while ((!debugSerial) && (millis() < 10000));//MMO: obligo a que me epere a  abrir el monitor, almennos por 10 segundos
+	while (!debugSerial); //MMO: sino se ejecuta el monitor no se ejecuta el código
+	//y lo coloco al principio para que no se ejecute nada hasta que habra el Monitor
 
 	int MMObaudrateLora = LoRaBee.getDefaultBaudRate();
 	loraSerial.begin(MMObaudrateLora);
@@ -68,8 +78,32 @@ void setup()
 	{
 		debugSerial.println("Failed to send the packet!");
 	}
+
+
+
+
+	// Uncomment this line to for the RN2903 with the Actility Network
+	//For OTAA update the DEFAULT_FSB in the library
+	int MMO_setFsbChannels=LoRaBee.setFsbChannels(0);
+	// Enables all the channels that belong to the given Frequency Sub-Band (FSB)
+	// and disables the rest.
+	// fsb is [1, 8] or 0 to enable all channels.
+	// Returns true if all channels were set successfully.
+	//bool setFsbChannels(uint8_t fsb);
+	/*
+	delay(1100);
+	if (MMO_setFsbChannels)
+	{
+		debugSerial.println("True el setFsbChannels");
+	}
+	else
+	{
+		debugSerial.println("False el setFsbChannels");
+	}
+	*/
 }
 
 void loop()
 {
+	//debugSerial.println(LoRaBee.STR_CMD_SET_CHANNEL_STATUS);
 }
