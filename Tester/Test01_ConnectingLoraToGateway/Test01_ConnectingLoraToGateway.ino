@@ -7,11 +7,16 @@ Caracteristicas:
 Prueba fallida
 El monotor me genera "Connection to the network failed!"
 este código intenta establecer el enlace con la infomación que le doy, habria que crear un código con los valores establecidos por el gateway
+Probablemente falte la inicializacion del LoRa
+
+Secuencia del código:
+-
+
 */
 
 #include "Sodaq_RN2483.h" //MMO: asegurar "" o <>
 
-#define loraSerial Serial1 //MMO: asegurar sii Serial2 es el pueto del lora
+#define loraSerial Serial2 //MMO: asegurar sii Serial2 es el pueto del lora
 #define debugSerial SerialUSB
 
 // USE YOUR OWN KEYS!
@@ -47,7 +52,9 @@ void setup()
 {
 	while ((!debugSerial) && (millis() < 10000));//MMO: obligo a que me epere a  abrir el monitor, almennos por 10 segundos
 
-	loraSerial.begin(LoRaBee.getDefaultBaudRate());
+	int MMObaudrateLora=LoRaBee.getDefaultBaudRate();
+	loraSerial.begin(MMObaudrateLora);
+	debugSerial.println(MMObaudrateLora);
 
 	if (!LoRaBee.initABP(loraSerial, devAddr, appSKey, nwkSKey, true))
 	{
